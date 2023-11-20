@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { login } from '../utils/auth'
-
+import { Button } from '@nextui-org/react'
 
 export default function PupilLogin({ setUser }) {
     const [username, setUsername] = useState('')
@@ -15,7 +15,6 @@ export default function PupilLogin({ setUser }) {
         }
         try {
             const user = await login(credentials)
-            console.log(user)
             setUser(user)
         } catch {
             setError('Log In Failed - Try Again')
@@ -23,8 +22,8 @@ export default function PupilLogin({ setUser }) {
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
+        <div className='container'>
+            <form className='flex flex-column' onSubmit={handleSubmit}>
                 <label>Username:</label>
                 <input
                     type="text"
@@ -41,9 +40,9 @@ export default function PupilLogin({ setUser }) {
                     onChange={e => setPassword(e.target.value)}
                     required
                 />
-                <button type="submit">Submit</button>
+                <Button type="submit">Submit</Button>
             </form>
             <p className="error-message">&nbsp;{error}</p>
-        </>
+        </div>
     )
 }

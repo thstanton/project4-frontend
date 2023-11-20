@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { logout } from '../utils/auth'
+import { Button } from '@nextui-org/react'
 
 export default function NavBar({ user, setUser }) {
     function handleLogout() {
@@ -9,27 +10,30 @@ export default function NavBar({ user, setUser }) {
     }
 
     return (
-        <nav>
-            <h1><Link to="/">JOTTER</Link></h1>
-            { user && user.groups[0] === 1 ?
-            // Teacher Nav Bar
-                <>
-                    <Link to="/">Classes</Link>
-                    <Link to="/contexts">Contexts</Link>
-                    { user.first_name }
-                    <button onClick={handleLogout}>Log Out</button>
-                </>
-            : user && user.groups[0] === 2 ?
-            // Pupil Nav Bar
-                <>
-                    { user.first_name }
-                    <button onClick={handleLogout}>Log Out</button>
-                </>
-            :
-            // Unlogged In User Nav Bar
-                <>
-                </>
-            }
-        </nav>
+        <div className={ user && user.groups[0] === 1 ? 'bg-yellow' : 'bg-blue' }>
+            <nav className='flex items-center justify-between p-4'>
+                <div className='text-white text-5xl font-display'><Link to="/" className='text-white'>Jotter</Link></div>
+                {user && user.groups[0] === 1 ?
+                    // Teacher Nav Bar
+                    <div className='space-x-4'>
+                        <Link to="/">Classes</Link>
+                        <Link to="/contexts">Contexts</Link>
+                        Teacher: {user.first_name}
+                        <Button onClick={handleLogout}>Log Out</Button>
+                    </div>
+                    : user && user.groups[0] === 2 ?
+                        // Pupil Nav Bar
+                        <div className='space-x-4'>
+                            Pupil: {user.first_name}
+                            <Button onClick={handleLogout}>Log Out</Button>
+                        </div>
+                        :
+                        // Unlogged In User Nav Bar
+                        <div className='space-x-4'>
+                            Log in to continue
+                        </div>
+                }
+            </nav>
+        </div>
     )
 }
