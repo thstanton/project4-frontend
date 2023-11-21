@@ -2,7 +2,7 @@ import JotterCard from "./JotterCard"
 
 export default function JotterCardList({ jotters }) {
   return (
-    <div>
+    <div className="container flex flex-row">
         {
             jotters.map(jotter => (
                 <JotterCard key={ jotter.id } jotter={ jotter } />

@@ -30,18 +30,18 @@ export default function PupilHome() {
   }, [])
 
   return (
-    <div>
+    <div className='container'>
       <PupilUserInfo />
       <div>
-        <h1>To Do List</h1>
+        <h1 className='font-display text-3xl'>To Do List</h1>
         { contexts && <ContextCardList contexts={ contexts } /> }
       </div>
       <div>
-        <h1>To Finish</h1>
+        <h1 className='font-display text-3xl'>To Finish</h1>
         { unfinished && <JotterCardList jotters={ unfinished } /> }
       </div>
       <div>
-        <h1>My Library</h1>
+        <h1 className='font-display text-3xl'>My Library</h1>
         { finished && <JotterCardList jotters={ finished } /> }
       </div>
     </div>

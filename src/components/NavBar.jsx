@@ -1,12 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../utils/auth'
 import { Button } from '@nextui-org/react'
 
 export default function NavBar({ user, setUser }) {
+    const navigate = useNavigate()
+
     function handleLogout() {
         logout()
         setUser(null)
+        navigate('/')
     }
 
     return (

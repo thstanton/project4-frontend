@@ -21,8 +21,20 @@ function createJotter(body) {
     return data
 }
 
+// Fetch/Edit/Delete jotter - determined by method passed in
+function singleJotter(id, method, body) {
+    const data = axios({
+        method: method,
+        url: `${API_URL}/jotter/${id}/`,
+        headers: headers(),
+        data: body
+    })
+    return data
+}
+
 export const jottersAPI = {
     unfinished: unfinishedJotters,
     finished: finishedJotters,
-    create: createJotter
+    create: createJotter,
+    single: singleJotter
 }

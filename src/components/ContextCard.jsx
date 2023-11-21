@@ -1,16 +1,19 @@
-import { redirect } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { jottersAPI } from "../utils/jotters-api";
 import { Card, CardBody } from "@nextui-org/react";
 
 export default function ContextCard({ context }) {
+    const navigate = useNavigate()
+
     async function handleJotterCreate() {
         const body = {
             context: context.id
         }
         try {
             const response = await jottersAPI.create(body)
+            console.log(response)
             if (response.status === 201) {
-                return redirect(`/editor/${context.id}`)
+                return navigate(`/editor/${response.id}`)
             }
         } catch (err) {
             throw new Error(err)
