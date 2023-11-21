@@ -5,7 +5,7 @@ import JotterCardList from '../components/JotterCardList'
 import ContextCardList from '../components/ContextCardList'
 import PupilUserInfo from '../components/PupilUserInfo'
 
-export default function PupilHome() {
+export default function PupilHome({ user, setUser }) {
   const [contexts, setContexts] = useState(null)
   const [unfinished, setUnfinished] = useState(null)
   const [finished, setFinished] = useState(null)
@@ -27,22 +27,34 @@ export default function PupilHome() {
       }
     }
     fetchData()
-  }, [])
+  }, [user])
 
   return (
     <div className='container'>
-      <PupilUserInfo />
+      <PupilUserInfo user={user} setUser={setUser} />
       <div>
         <h1 className='font-display text-3xl'>To Do List</h1>
-        { contexts && <ContextCardList contexts={ contexts } /> }
+        { contexts && contexts.length ? 
+          <ContextCardList contexts={ contexts } /> 
+        :
+          <p>You're up to date!</p>
+        }
       </div>
       <div>
         <h1 className='font-display text-3xl'>To Finish</h1>
-        { unfinished && <JotterCardList jotters={ unfinished } /> }
+        { unfinished && unfinished.length ? 
+          <JotterCardList jotters={ unfinished } /> 
+        :
+          <p>You're up to date!</p>
+        }
       </div>
       <div>
         <h1 className='font-display text-3xl'>My Library</h1>
-        { finished && <JotterCardList jotters={ finished } /> }
+        { finished && finished.length ? 
+          <JotterCardList jotters={ finished } /> 
+        :
+          <p>Your library is empty - get writing!</p>
+        }
       </div>
     </div>
   )

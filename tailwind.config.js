@@ -16,7 +16,7 @@ module.exports = {
       'gray-light': '#d3dce6',
     },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
+      sans: ['Heebo', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
       display: ['Love Ya Like A Sister', 'sans-serif']
     },

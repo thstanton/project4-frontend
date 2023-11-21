@@ -1,9 +1,15 @@
 
 
-export default function JotterEditor({ body, setBody }) {
-  return (
-    <div>
-        <textarea name="jottereditor" value={body} cols="30" rows="10"></textarea>
-    </div>
-  )
+export default function JotterEditor({ body, setBody, complete }) {
+
+    return (
+        <textarea 
+            name="jottereditor" 
+            value={body} 
+            onChange={e => setBody(e.target.value)} 
+            readOnly={complete}
+            className="text-4xl w-full h-48"
+        />
+
+    )
 }

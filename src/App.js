@@ -12,6 +12,7 @@ import PupilHome from './pages/PupilHome'
 import PupilEditor from './pages/PupilEditor'
 import './App.css'
 import { getToken, getUser } from './utils/auth'
+import SignUp from './pages/SignUp'
 
 
 function App() {
@@ -47,13 +48,29 @@ function App() {
           : user && user.groups[0] === 2 ?
             // Pupil Routes
             <Routes>
-              <Route path='/' element={<PupilHome />} />
+              <Route path='/' element={<PupilHome user={user} setUser={setUser} />} />
               <Route path='/editor/:id' element={<PupilEditor />} />
               <Route path='/jotter/:id' element={<JotterView />} />
             </Routes>
             :
             // Landing Page for Not Logged In users
-            <LandingPage user={user} setUser={setUser} />
+            <Routes>
+              <Route path='/' element={<LandingPage user={user} setUser={setUser} />} />
+              <Route path='/pupil/signup' element={
+                <SignUp 
+                  userType="2"
+                  setUser={setUser}
+                />
+              } 
+              />
+              <Route path='/teacher/signup' element={
+                <SignUp 
+                  userType="1"
+                  setUser={setUser}
+                />
+              } 
+              />
+            </Routes>
         }
       </div>
     </main>

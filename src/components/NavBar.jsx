@@ -22,13 +22,13 @@ export default function NavBar({ user, setUser }) {
                         <Link to="/">Classes</Link>
                         <Link to="/contexts">Contexts</Link>
                         Teacher: {user.first_name}
-                        <Button onClick={handleLogout}>Log Out</Button>
+                        <Button onClick={handleLogout} color='danger'>Log Out</Button>
                     </div>
                     : user && user.groups[0] === 2 ?
                         // Pupil Nav Bar
                         <div className='space-x-4'>
                             Pupil: {user.first_name}
-                            <Button onClick={handleLogout}>Log Out</Button>
+                            <Button onClick={handleLogout} color='danger'>Log Out</Button>
                         </div>
                         :
                         // Unlogged In User Nav Bar
