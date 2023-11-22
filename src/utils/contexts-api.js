@@ -3,6 +3,12 @@ import { headers } from "./auth"
 
 const API_URL = process.env.REACT_APP_API_URL
 
+// Fetch owned contexts
+function ownedContexts() {
+    const data = axios.get(`${API_URL}/contexts/`, { headers: headers() })
+    return data
+}
+
 // Fetch assigned contexts
 function assignedContexts() {
     const data = axios.get(`${API_URL}/class/pupil/`, { headers: headers() })
@@ -10,8 +16,8 @@ function assignedContexts() {
 }
 
 // Create new context
-function newContext(context) {
-    const response = axios.post(`${API_URL}/contexts/create/`, context, { headers: headers() })
+function newContext(data) {
+    const response = axios.post(`${API_URL}/contexts/create/`, data, { headers: headers() })
     return response
 }
 
@@ -27,7 +33,8 @@ function singleContext(id, method, body) {
 }
 
 export const contextsAPI = {
+    own: ownedContexts,
     getAssigned: assignedContexts,
     create: newContext,
-    single: singleContext
+    single: singleContext,
 }

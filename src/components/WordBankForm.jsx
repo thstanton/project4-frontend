@@ -1,27 +1,23 @@
 import { useState } from 'react'
 import { Button } from "@nextui-org/react"
+import { wordbanksAPI } from '../utils/wordbanks-api'
 
-export default function WordBankForm({ setWordbanks }) {
+export default function WordBankForm({ context, setWordbanks }) {
     const [title, setTitle] = useState('')
-    const [wordsInput, setWordsInput] = useState('')
-    const [words, setWords] = useState([])
 
-    function handleWordsEntry(e) {
-        setWordsInput(e.target.value)
-        const wordsArr = e.target.value.split(', ')
-        setWords(wordsArr)
-    }
-
-    function handleAddWordBank() {
-        const wordObjArr = words.map(word => ({ word: word }))
+    async function handleAddWordBank() {
         const newWordBank = {
             title: title,
-            words: wordObjArr
+            context: context.id
         }
-        setWordbanks(prevWordbanks => [...prevWordbanks, newWordBank])
-        setTitle('')
-        setWordsInput('')
-        setWords([])
+        try {
+            const response = await wordbanksAPI.createBank(newWordBank)
+            if (response.status === 201) {
+                setWordbanks(prevWordbanks => [...prevWordbanks, response.data])
+            }
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     return (
@@ -33,13 +29,7 @@ export default function WordBankForm({ setWordbanks }) {
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
             />
-            <label>Words (separate with commas):</label>
-            <input
-                type="textarea"
-                onChange={handleWordsEntry}
-                value={wordsInput}
-            />
-            <Button onClick={handleAddWordBank}>Add Word Bank</Button>
+            <Button onClick={handleAddWordBank}>Add Word Bank</Button>            
         </div>
     )
 }

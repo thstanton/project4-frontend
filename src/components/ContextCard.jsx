@@ -16,7 +16,7 @@ export default function ContextCard({ context }) {
                 return navigate(`/editor/${response.data.id}`)
             }
         } catch (err) {
-            throw new Error(err)
+            console.error(err)
         }
     }
 
