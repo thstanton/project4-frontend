@@ -34,7 +34,7 @@ export async function getUser() {
             const user = await axios.get(`${API_URL}/users/self/`, { headers: headers() })
             return user.data[0]
         } catch (err) {
-            throw new Error(err)
+            console.error(err)
         }   
     }
     return null

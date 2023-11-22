@@ -9,6 +9,25 @@ function assignedContexts() {
     return data
 }
 
+// Create new context
+function newContext(context) {
+    const response = axios.post(`${API_URL}/contexts/create/`, context, { headers: headers() })
+    return response
+}
+
+// Fetch/Edit/Delete Context - determined by method passed in
+function singleContext(id, method, body) {
+    const data = axios({
+        method: method,
+        url: `${API_URL}/contexts/${id}/`,
+        headers: headers(),
+        data: body
+    })
+    return data
+}
+
 export const contextsAPI = {
-    getAssigned: assignedContexts
+    getAssigned: assignedContexts,
+    create: newContext,
+    single: singleContext
 }

@@ -4,7 +4,8 @@ import LandingPage from './pages/LandingPage'
 import TeacherHome from './pages/TeacherHome'
 import TeacherContexts from './pages/TeacherContexts'
 import ContextView from './pages/ContextView'
-import CreateEditContext from './pages/CreateEditContext'
+import CreateContext from './pages/CreateContext'
+import EditContext from './pages/EditContext'
 import PupilView from './pages/PupilView'
 import JotterView from './pages/JotterView'
 import NavBar from './components/NavBar'
@@ -40,8 +41,8 @@ function App() {
             <Route path='/' element={<TeacherHome />} />
             <Route path='/contexts' element={<TeacherContexts />} />
             <Route path='/contexts/:id' element={<ContextView />} />
-            <Route path='/contexts/create' element={<CreateEditContext />} />
-            <Route path='/contexts/:id/edit' element={<CreateEditContext />} />
+            <Route path='/contexts/create' element={<CreateContext />} />
+            <Route path='/contexts/:id/edit' element={<EditContext />} />
             <Route path='/contexts/pupil/:id' element={<PupilView />} />
             <Route path='jotter/:id' element={<JotterView />} />
           </Routes>
