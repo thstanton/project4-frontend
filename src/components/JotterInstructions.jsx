@@ -11,6 +11,7 @@ export default function JotterInstructions({ context }) {
           </p>
         <img 
           src={context.images[0].url}
+          alt={context.title}
           className="max-w-sm mx-auto"
         />
     </div>

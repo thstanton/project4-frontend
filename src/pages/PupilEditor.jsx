@@ -40,7 +40,7 @@ export default function PupilEditor() {
       }
     }
     fetchData()
-  }, [])
+  }, [id])
 
   // Update the jotter on the database
   function updateJotter(isComplete) {
@@ -85,7 +85,7 @@ export default function PupilEditor() {
     setBody(context.prompt)
     setShowClearModal(false)
     try {
-      const response = await updateJotter(false)
+      await updateJotter(false)
     } catch (err) {
       console.error(err)
     }
