@@ -32,9 +32,23 @@ function singleContext(id, method, body) {
     return data
 }
 
+// Assign context to a class
+function assignClass(contextID, classID) {
+    const response = axios.post(`${API_URL}/contexts/${contextID}/assign/${classID}/`, { headers: headers() })
+    return response
+}
+
+// Unassign context from a class
+function unassignClass(contextID, classID) {
+    const response = axios.delete(`${API_URL}/contexts/${contextID}/unassign/${classID}/`, { headers: headers() })
+    return response
+}
+
 export const contextsAPI = {
     own: ownedContexts,
     getAssigned: assignedContexts,
     create: newContext,
     single: singleContext,
+    assign: assignClass,
+    unassign: unassignClass
 }

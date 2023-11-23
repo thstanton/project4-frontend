@@ -29,7 +29,7 @@ export default function WordBankForm({ context, setWordbanks }) {
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
             />
-            <Button onClick={handleAddWordBank}>Add Word Bank</Button>            
+            <Button color="primary" onClick={handleAddWordBank}>Add Word Bank</Button>            
         </div>
     )
 }

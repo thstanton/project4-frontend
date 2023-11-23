@@ -32,9 +32,16 @@ function singleJotter(id, method, body) {
     return data
 }
 
+// List of Jotters for one context
+function contextJotters(contextID) {
+    const data = axios.get(`${API_URL}/jotter/context/${contextID}`, { headers: headers() })
+    return data
+}
+
 export const jottersAPI = {
     unfinished: unfinishedJotters,
     finished: finishedJotters,
     create: createJotter,
-    single: singleJotter
+    single: singleJotter,
+    context: contextJotters
 }

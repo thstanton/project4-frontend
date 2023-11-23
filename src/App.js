@@ -43,7 +43,7 @@ function App() {
             <Route path='/contexts/create' element={<CreateEditContext />} />
             <Route path='/contexts/:id/edit' element={<CreateEditContext />} />
             <Route path='/contexts/pupil/:id' element={<PupilView />} />
-            <Route path='jotter/:id' element={<JotterView />} />
+            <Route path='/jotter/:id' element={<JotterView />} />
           </Routes>
           : user && user.groups[0] === 2 ?
             // Pupil Routes

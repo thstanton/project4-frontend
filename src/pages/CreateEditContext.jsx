@@ -22,6 +22,7 @@ export default function CreateEditContext() {
       try {
         const response = await contextsAPI.single(id, 'GET')
         setContext({
+          id: response.data.id,
           title: response.data.title,
           prompt: response.data.prompt,
           instructions: response.data.instructions
@@ -32,7 +33,7 @@ export default function CreateEditContext() {
         console.error(err)
       }
     }
-    
+
     if (id) fetchData()
   }, [id])
 
@@ -66,7 +67,7 @@ export default function CreateEditContext() {
     try {
       const response = await contextsAPI.single(id, 'DELETE')
       if (response.status === 204) {
-        navigate('/')
+        navigate('/contexts')
       } else {
         console.error(response)
       }
@@ -88,8 +89,8 @@ export default function CreateEditContext() {
             <Button onClick={handleCreateOverview}>Create Overview</Button>
             :
             <>
-              <Button onClick={handleUpdateOverview}>Update Overview</Button>
-              <Button onClick={handleDeleteContext}>Delete Context</Button>
+              <Button color="warning" onClick={handleUpdateOverview}>Update Overview</Button>
+              <Button color="danger" onClick={handleDeleteContext}>Delete Context</Button>
             </>
           }
         </div>
@@ -98,15 +99,16 @@ export default function CreateEditContext() {
         <>
           <div>
             {/* Word Banks - display current, form to add new */}
-            <WordBankForm
-              setWordbanks={setWordbanks}
-              context={context}
-            />
+            <h1>Word Banks:</h1>
             { 
               wordbanks && wordbanks.length && wordbanks.map(wordbank => (
                 <EditWordBank key={wordbank.id} wordbank={wordbank} />
               ))
             }
+            <WordBankForm
+              setWordbanks={setWordbanks}
+              context={context}
+            />
           </div>
           <div>
             {/* Images */}
