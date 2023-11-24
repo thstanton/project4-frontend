@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardFooter } from "@nextui-org/react"
+import { Button, Card, CardBody } from "@nextui-org/react"
 import { useState } from "react"
 import { wordbanksAPI } from "../utils/wordbanks-api"
 
@@ -37,7 +37,7 @@ export default function EditImage({ image, images, setImages }) {
                 <div>
                     <Card>
                         <CardBody>
-                            <img src={image.url} alt="Image" />
+                            <img src={image.url} alt=''/>
                         </CardBody>
                     </Card>
                     <label>Image URL:</label>

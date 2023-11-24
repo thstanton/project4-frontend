@@ -8,7 +8,6 @@ import ClassDetailView from "../components/ClassDetailView"
 export default function TeacherHome() {
   const [classes, setClasses] = useState([])
   const [showNewClassForm, setShowNewClassForm] = useState(false)
-  const [showClassDetail, setShowClassDetail] = useState(false)
   const [selectedClass, setSelectedClass] = useState()
 
   useEffect(() => {
@@ -22,10 +21,6 @@ export default function TeacherHome() {
     }
     fetchData()
   }, [])
-
-  async function handleRemovePupil(id) {
-    
-  }
 
   return (
     <div>
@@ -46,7 +41,6 @@ export default function TeacherHome() {
               key={pupilClass.id}
               onClick={() => {
                 setSelectedClass(pupilClass)
-                setShowClassDetail(true)
               }}
             >
               { pupilClass.name }

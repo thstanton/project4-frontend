@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { jottersAPI } from "../utils/jotters-api";
 import { Card, CardBody, CardFooter } from "@nextui-org/react";
 
 export default function TeacherContextCard({ context }) {
