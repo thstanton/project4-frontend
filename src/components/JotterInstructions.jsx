@@ -9,19 +9,13 @@ export default function JotterInstructions({ context }) {
       <p className="text-2xl">
         {context.instructions}
       </p>
-      {context.images.length &&
-        <>
-          <img
-            src={context.images[0].url}
-            alt={context.title}
-            className="max-w-sm mx-auto"
-          />
-          <img
-            src={context.images[1].url}
-            alt={context.title}
-            className="max-w-sm mx-auto"
-          />
-        </>
+      {context.images && context.images.length && context.images.map(image => (
+        <img
+          src={image.url}
+          alt={context.title}
+          className="max-w-sm mx-auto"
+        />
+      ))
       }
     </div>
   )
