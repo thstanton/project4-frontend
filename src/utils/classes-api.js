@@ -21,8 +21,29 @@ function editClass(updatedClass) {
     return data
 }
 
+// Delete class
+function deleteClass(deletedClass) {
+    const data = axios.delete(`${API_URL}/class/${deletedClass}/`, { headers: headers() })
+    return data
+}
+
+// Join Class
+function joinClass(key) {
+    const response = axios.post(`${API_URL}/class/join/`, key, { headers: headers() })
+    return response
+}
+
+// Remove pupil from class
+function removeFromClass(classID, pupilID) {
+    const response = axios.delete(`${API_URL}/class/${classID}/remove/${pupilID}/`, { headers: headers() })
+    return response
+}
+
 export const classesAPI = {
     own: ownedClasses,
     new: newClass,
-    edit: editClass
+    edit: editClass,
+    delete: deleteClass,
+    join: joinClass,
+    removePupil: removeFromClass
 }

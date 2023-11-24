@@ -5,6 +5,8 @@ import ContextForm from "../components/ContextForm"
 import { Button } from "@nextui-org/react"
 import WordBankForm from "../components/WordBankForm"
 import EditWordBank from "../components/EditWordBank"
+import ImageForm from "../components/ImageForm"
+import EditImage from "../components/EditImage"
 
 export default function CreateEditContext() {
   const navigate = useNavigate()
@@ -37,7 +39,8 @@ export default function CreateEditContext() {
     if (id) fetchData()
   }, [id])
 
-  async function handleCreateOverview() {
+  async function handleCreateOverview(e) {
+    e.preventDefault()
     try {
       const response = await contextsAPI.create(context)
       if (response.status === 201) {
@@ -84,10 +87,9 @@ export default function CreateEditContext() {
           <ContextForm
             context={context}
             setContext={setContext}
+            handleCreateOverview={handleCreateOverview}
           />
-          {!context.id ?
-            <Button onClick={handleCreateOverview}>Create Overview</Button>
-            :
+          {context.id &&
             <>
               <Button color="warning" onClick={handleUpdateOverview}>Update Overview</Button>
               <Button color="danger" onClick={handleDeleteContext}>Delete Context</Button>
@@ -112,6 +114,23 @@ export default function CreateEditContext() {
           </div>
           <div>
             {/* Images */}
+            {
+              images && images.length && images.map(image => (
+                <EditImage 
+                  key={image.id} 
+                  image={image}
+                  images={images}
+                  setImages={setImages}  
+                  context={context} 
+                />
+              ))
+            }
+            <h1>Images:</h1>
+            <ImageForm
+              images={images} 
+              setImages={setImages}  
+              context={context}
+            />
           </div>
         </>
       }

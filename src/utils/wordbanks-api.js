@@ -35,11 +35,30 @@ function singleWord(id, method, body) {
         data: body
     })
     return data
-} 
+}
+
+// Create new image
+function newImage(data) {
+    const response = axios.post(`${API_URL}/contexts/image/create/`, data, { headers: headers() })
+    return response
+}
+
+// Fetch/Edit/Delete Image - determined by method passed in
+function singleImage(id, method, body) {
+    const data = axios({
+        method: method,
+        url: `${API_URL}/contexts/image/${id}/`,
+        headers: headers(),
+        data: body
+    })
+    return data
+}
 
 export const wordbanksAPI = {
     createBank: newWordbank,
     singleBank: singleWordbank,
     createWordList: newWordList,
-    singleWord: singleWord
+    singleWord: singleWord,
+    createImage: newImage,
+    singleImage: singleImage
 }

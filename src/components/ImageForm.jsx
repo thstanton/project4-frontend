@@ -1,32 +1,40 @@
 import { useState } from 'react'
-import { Button } from '@nextui-org/react'
+import { Button } from "@nextui-org/react"
+import { wordbanksAPI } from '../utils/wordbanks-api'
 
-export default function ImageForm({ images, setImages }) {
-    const [newImageURL, setNewImageURL] = useState('')
+export default function ImageForm({ context, setImages, images }) {
+    const [url, setUrl] = useState('')
 
-    function handleAddImage() {
-        const newImageObj = {
-            url: newImageURL
+    async function handleAddImage(e) {
+        e.preventDefault()
+
+        const newImage = {
+            url: url,
+            context: context.id
         }
-        setImages(prevImages => [...prevImages, newImageObj])
-        setNewImageURL('')
+        try {
+            const response = await wordbanksAPI.createImage(newImage)
+            if (response.status === 201) {
+                setImages(prevImages => [...prevImages, response.data])
+            }
+        } catch (err) {
+            console.error(err)
+        }
     }
-  return (
-    <div>
-        <h2>Add Images:</h2>
-        <label>URL:</label>
-        <input
-          type="text"
-          value={newImageURL}
-          onChange={e => setNewImageURL(e.target.value)}
-        />
-        <Button 
-            onClick={handleAddImage} 
-            isDisabled={images && images.length >= 3}
-        >
-            Add Image
-        </Button>
-        { images && images.length >= 3 && <p>Maximum number of images reached</p> }
-    </div>
-  )
+
+    return (
+        <div>
+            <h2>Add Image:</h2>
+            <form onSubmit={handleAddImage}>
+                <label>URL:</label>
+                <input
+                    type="text"
+                    onChange={(e) => setUrl(e.target.value)}
+                    value={url}
+                    required
+                />
+                <Button color="primary" type='submit'>Add Image</Button>
+            </form>
+        </div>
+    )
 }

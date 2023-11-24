@@ -2,7 +2,7 @@ import { Button } from "@nextui-org/react"
 import { useState } from "react"
 import { classesAPI } from "../utils/classes-api"
 
-export default function EditClass({ setShowEditClassForm, classes, setClasses, pupilClass }) {
+export default function EditClass({ setShowEditClassForm, classes, setClasses, setPupilClass, pupilClass }) {
     const [updatedClass, setUpdatedClass] = useState(pupilClass)
 
     async function handleSubmit() {
@@ -14,6 +14,7 @@ export default function EditClass({ setShowEditClassForm, classes, setClasses, p
                     const newClasses = [...classes]
                     newClasses[updatedIndex] = response.data
                     setClasses(newClasses)
+                    setPupilClass(response.data)
                     setShowEditClassForm(false)
                 }
             }

@@ -45,11 +45,6 @@ export function logout() {
     localStorage.removeItem('refresh_token') 
 }
 
-export function joinClass(key) {
-    const response = axios.post(`${API_URL}/class/join/`, key, { headers: headers() })
-    return response
-}
-
 export function createAccount(groupId, newUser) {
     const response = axios.post(
         `${API_URL}/users/${groupId}/create/`, 

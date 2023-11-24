@@ -71,7 +71,7 @@ export default function EditWordBank({ wordbank }) {
                     />
                     <Button color="warning" onClick={handleUpdate}>Update Wordbank Title</Button>
                     <Button color="danger" onClick={handleDelete}>Delete Wordbank</Button>
-
+                    <label>Add words to the word bank separated by commas and spaces (eg. monkey, banana)</label>
                     <input type="textarea" value={newWordsInput} onChange={e => setNewWordsInput(e.target.value)} />
                     <Button color="primary" onClick={handleAddWords}>Add Words</Button>
 

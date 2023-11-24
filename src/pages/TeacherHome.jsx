@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
 import { classesAPI } from '../utils/classes-api'
-import { Tabs, Tab, Card, CardBody, Button } from '@nextui-org/react'
-import TeacherContextCardList from "../components/TeacherContextCardList"
+import { Button } from '@nextui-org/react'
 import CreateClass from "../components/CreateClass"
-import EditClass from "../components/EditClass"
+import ClassDetailView from "../components/ClassDetailView"
+
 
 export default function TeacherHome() {
   const [classes, setClasses] = useState([])
   const [showNewClassForm, setShowNewClassForm] = useState(false)
-  const [showEditClassForm, setShowEditClassForm] = useState(false)
+  const [showClassDetail, setShowClassDetail] = useState(false)
+  const [selectedClass, setSelectedClass] = useState()
 
   useEffect(() => {
     async function fetchData() {
@@ -40,46 +41,26 @@ export default function TeacherHome() {
       <div>
         <h1>My Classes:</h1>
         { classes && 
-          <Tabs size="lg" items={classes}>
-            {(item) => (
-              <Tab key={item.id} title={item.name} aria-label={item.name}>
-                <div>
-                  <h1>Class details:</h1>
-                  <Card>
-                    <CardBody>
-                      <p>{item.name}</p>
-                      <p>Year group: {item.year_group}</p>
-                      <p>Teacher: {item.teacher.first_name} {item.teacher.last_name}</p>
-                      <p>Access key: {item.access_key}</p>
-                      <Button color="warning" size="sm" onClick={() => setShowEditClassForm(true)}>Edit Class</Button>
-                      { showEditClassForm &&
-                        <EditClass
-                          classes={classes} 
-                          setClasses={setClasses} 
-                          setShowEditClassForm={setShowEditClassForm}
-                          pupilClass={item}
-                        />
-                      }
-                    </CardBody>
-                  </Card>
-                  <div>
-                    <h1>Class members:</h1>
-                    {
-                      item.pupils.length ? item.pupils.map(pupil => (
-                        <p key={pupil.id}>{pupil.first_name} <Button size="sm" color="danger">Remove from class</Button></p>
-                      )) 
-                      : 
-                      <p>No pupils have joined this class yet</p>
-                    }
-                  </div>
-                  <div>
-                    <h1>Assigned Contexts:</h1>
-                    <TeacherContextCardList contexts={item.contexts} />
-                  </div>
-                </div>
-              </Tab>
-            )}
-          </Tabs>
+          classes.map(pupilClass => (
+            <Button 
+              key={pupilClass.id}
+              onClick={() => {
+                setSelectedClass(pupilClass)
+                setShowClassDetail(true)
+              }}
+            >
+              { pupilClass.name }
+            </Button>
+          ))
+        }
+        {
+          selectedClass &&
+          <ClassDetailView 
+            pupilClass={selectedClass} 
+            setPupilClass={setSelectedClass}
+            classes={classes}
+            setClasses={setClasses}
+          />
         }
       </div>
     </div>

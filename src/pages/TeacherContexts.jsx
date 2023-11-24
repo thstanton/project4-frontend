@@ -1,10 +1,11 @@
 import { Button } from '@nextui-org/react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { contextsAPI } from '../utils/contexts-api'
 import TeacherContextCardList from '../components/TeacherContextCardList'
 
 export default function TeacherContexts() {
+  const navigate = useNavigate()
   const [contexts, setContexts] = useState([])
   const [dataLoaded, setDataLoaded] = useState(false)
 
@@ -27,7 +28,7 @@ export default function TeacherContexts() {
   return (
     <div>
       <div>
-        <Link to='/contexts/create' color='success'><Button>Create new context</Button></Link>
+        <Button onClick={() => navigate('/contexts/create')} color='success'>Create new context</Button>
       </div>
       <div>
         { dataLoaded ? 

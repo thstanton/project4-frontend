@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button } from '@nextui-org/react'
-import { getUser, joinClass } from '../utils/auth'
+import { getUser } from '../utils/auth'
+import { classesAPI } from '../utils/classes-api'
 
 export default function JoinClassForm({ setShowJoinClass, setUser }) {
     const [accessKey, setAccessKey] = useState('')
@@ -10,7 +11,7 @@ export default function JoinClassForm({ setShowJoinClass, setUser }) {
         e.preventDefault()
         const key = { key: accessKey }
         try {
-            const response = await joinClass(key)
+            const response = await classesAPI.join(key)
             
             if (response.status === 201) {
                 const updatedUser = await getUser()
