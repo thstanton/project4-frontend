@@ -81,7 +81,7 @@ export default function EditWordBank({ wordbank }) {
                                 <h5>{word.word}</h5>
                             </CardBody>
                             <CardFooter>
-                                <Button color="danger" onClick={() => handleDeleteWord(word.id)}>Delete Word</Button>
+                                <Button size="sm" color="danger" onClick={() => handleDeleteWord(word.id)}>Delete Word</Button>
                             </CardFooter>
                         </Card>
                     ))

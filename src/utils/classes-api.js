@@ -9,6 +9,20 @@ function ownedClasses() {
     return data
 }
 
+// Create new class
+function newClass(newClass) {
+    const data = axios.post(`${API_URL}/class/create/`, newClass, { headers: headers() })
+    return data
+}
+
+// Edit class
+function editClass(updatedClass) {
+    const data = axios.put(`${API_URL}/class/${updatedClass.id}/`, updatedClass, { headers: headers() })
+    return data
+}
+
 export const classesAPI = {
     own: ownedClasses,
+    new: newClass,
+    edit: editClass
 }
