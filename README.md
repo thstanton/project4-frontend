@@ -14,11 +14,9 @@ Jotter is my final General Assembly Software Engineering Immersive Course projec
 - Run ``npm install`` to install dependencies
 - Run ``npm start`` to start local server
 
-The back-end code is accessible through this repo:
-
-[https://github.com/thstanton/project4-backend](https://github.com/thstanton/project4-backend)
-Run ``pip install -r requirements.txt`` to install dependencies
-Run ``python3 manage.py runserver`` to start local server
+- The back-end code is accessible through this repo: [https://github.com/thstanton/project4-backend](https://github.com/thstanton/project4-backend)
+- Run ``pip install -r requirements.txt`` to install dependencies
+- Run ``python3 manage.py runserver`` to start local server
 
 ## Timeframe & Working Team
 
