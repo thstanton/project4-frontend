@@ -46,6 +46,7 @@ This project was completed solo, in 1 week.
                 <li>NodeJS</li>
                 <li>React</li>
                 <li>React Router</li>
+                <li>Axios</li>
                 <li>Tailwind CSS</li>
                 <li>Next UI</li>
             </ul>
