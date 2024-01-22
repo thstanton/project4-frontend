@@ -11,11 +11,11 @@ export default function NavBar({ user, setUser }) {
   }
 
   return (
-    <div className={user && user.groups[0] === 1 ? "bg-yellow" : "bg-blue"}>
+    <div className={user && user.groups[0] === 1 ? "bg-yellow-400" : "bg-blue-600"}>
       <nav className="flex items-center justify-between p-4">
         <div className="font-display text-5xl">
           <Link to="/">
-            <span className="text-stone-50">Jotter</span>
+            <span className="text-stone-100">Jotter</span>
           </Link>
         </div>
         {user && user.groups[0] === 1 ? (
@@ -38,7 +38,7 @@ export default function NavBar({ user, setUser }) {
           </div>
         ) : (
           // Unlogged In User Nav Bar
-          <div className="space-x-4">Log in to continue</div>
+          <div className="space-x-4"></div>
         )}
       </nav>
     </div>

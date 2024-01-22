@@ -23,23 +23,25 @@ export default function PupilLogin({ setUser }) {
   return (
     <div className="container mx-auto">
       <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-        <label>Username:</label>
         <input
+          className="input input-bordered"
           type="text"
           name="username"
           value={username}
+          placeholder="Username"
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-        <label>Password:</label>
         <input
+          className="input input-bordered"
           type="password"
           name="password"
           value={password}
+          placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button className="btn btn-block" type="submit">
+        <button className="btn btn-block btn-primary" type="submit">
           Submit
         </button>
       </form>

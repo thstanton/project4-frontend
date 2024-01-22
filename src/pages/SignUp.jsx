@@ -40,54 +40,54 @@ export default function SignUp({ userType, setUser }) {
 
   return (
     <div className="flex flex-col place-content-center">
-      <h1>Create Your Account:</h1>
+      <h1 className="text-neutral-700 mb-3 text-center text-xl font-bold">Create Your Account:</h1>
       <form onSubmit={handleSubmit}>
-        <label className="w-full">Choose a username:</label>
         <input
           type="text"
           name="username"
+          placeholder="Username"
           value={newUser.username}
           onChange={handleChange}
           required
-          className="w-full"
+          className="input input-bordered mb-3 w-full"
         />
-        <label className="w-full">Enter your first name:</label>
         <input
           type="text"
           name="first_name"
+          placeholder="First Name"
           value={newUser.first_name}
           onChange={handleChange}
           required
-          className="w-full"
+          className="input input-bordered mb-3 w-full"
         />
-        <label className="w-full">Enter your surname:</label>
         <input
           type="text"
           name="last_name"
+          placeholder="Last Name"
           value={newUser.last_name}
           onChange={handleChange}
           required
-          className="w-full"
+          className="input input-bordered mb-3 w-full"
         />
-        <label className="w-full">Enter your email:</label>
         <input
           type="email"
           name="email"
+          placeholder="Email Address"
           value={newUser.email}
           onChange={handleChange}
           required
-          className="w-full"
+          className="input input-bordered mb-3 w-full"
         />
-        <label className="w-full">Choose a password:</label>
         <input
           type="password"
           name="password"
+          placeholder="Password"
           value={newUser.password}
           onChange={handleChange}
           required
-          className="w-full"
+          className="input input-bordered mb-3 w-full"
         />
-        <button type="submit" className="btn btn-block">
+        <button type="submit" className="btn btn-block btn-primary">
           Submit
         </button>
       </form>
