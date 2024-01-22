@@ -1,13 +1,14 @@
-import { Button } from '@nextui-org/react'
-import React, { useState } from 'react'
-import JoinClassForm from './JoinClassForm'
+import React, { useState } from "react";
+import JoinClassForm from "./JoinClassForm";
 
 export default function PupilUserInfo({ user, setUser }) {
-  const [showJoinClass, setShowJoinClass] = useState()
+  const [showJoinClass, setShowJoinClass] = useState();
 
   return (
     <div>
-      <h1>{user.first_name} {user.last_name}</h1>
+      <h1>
+        {user.first_name} {user.last_name}
+      </h1>
       <p>My Classes:</p>
       <table>
         <thead>
@@ -22,13 +23,17 @@ export default function PupilUserInfo({ user, setUser }) {
             <tr key={idx}>
               <td>{pupilClass.name}</td>
               <td>{pupilClass.year_group}</td>
-              <td>{pupilClass.teacher.first_name} {pupilClass.teacher.last_name}</td>
+              <td>
+                {pupilClass.teacher.first_name} {pupilClass.teacher.last_name}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <Button onClick={() => setShowJoinClass(true)}>Join new class</Button>
-      { showJoinClass && <JoinClassForm setShowJoinClass={setShowJoinClass} setUser={setUser} /> }
+      <button className="btn" onClick={() => setShowJoinClass(true)}>Join new class</button>
+      {showJoinClass && (
+        <JoinClassForm setShowJoinClass={setShowJoinClass} setUser={setUser} />
+      )}
     </div>
-  )
+  );
 }

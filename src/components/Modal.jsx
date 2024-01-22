@@ -1,29 +1,31 @@
-import { Button, Card, CardBody, CardFooter } from '@nextui-org/react'
-
 export default function Modal({ cardText, confirmAction, cancelAction }) {
   return (
-    <div className='
+    <div
+      className="
         fixed 
         inset-0 
         z-50 
         flex 
         items-center 
         justify-center 
-        overflow-x-hidden 
         overflow-y-auto 
+        overflow-x-hidden 
         outline-none 
-        focus:outline-none
         backdrop-blur-sm
-    '>
-        <Card>
-            <CardBody>
-                { cardText }
-            </CardBody>
-            <CardFooter>
-                <Button color='danger' onClick={() => confirmAction()}>Yes</Button>
-                <Button color='default' onClick={() => cancelAction(false)}>No</Button>
-            </CardFooter>
-        </Card>
+        focus:outline-none
+    "
+    >
+      <div className="card">
+        <div className="card-body">{cardText}</div>
+        <div className="card-actions">
+          <button className="btn" onClick={() => confirmAction()}>
+            Yes
+          </button>
+          <button className="btn" onClick={() => cancelAction(false)}>
+            No
+          </button>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
