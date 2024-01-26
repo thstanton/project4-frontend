@@ -14,7 +14,7 @@ export default function WordBankForm({ context, setWordbanks }) {
       const response = await wordbanksAPI.createBank(newWordBank);
       if (response.status === 201) {
         setWordbanks((prevWordbanks) => [...prevWordbanks, response.data]);
-        setTitle("")
+        setTitle("");
       }
     } catch (err) {
       console.error(err);

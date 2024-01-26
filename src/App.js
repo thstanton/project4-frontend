@@ -8,10 +8,12 @@ import CreateEditContext from "./pages/CreateEditContext";
 import JotterView from "./pages/JotterView";
 import NavBar from "./components/NavBar";
 import PupilHome from "./pages/PupilHome";
+import PupilLibrary from "./pages/PupilLibrary";
 import PupilEditor from "./pages/PupilEditor";
 import "./App.css";
 import { getToken, getUser } from "./utils/auth";
 import SignUp from "./pages/SignUp";
+import PupilUserInfo from "./pages/PupilUserInfo";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,7 +31,7 @@ function App() {
   }, []);
 
   return (
-    <main className="bg-stone-50 w-full">
+    <main className="w-full bg-stone-50">
       <NavBar user={user} setUser={setUser} />
       <div className="m-3">
         {user && user.groups[0] === 1 ? (
@@ -49,6 +51,8 @@ function App() {
               path="/"
               element={<PupilHome user={user} setUser={setUser} />}
             />
+            <Route path="/classes" element={<PupilUserInfo user={user} />} />
+            <Route path="/library" element={<PupilLibrary />} />
             <Route path="/editor/:id" element={<PupilEditor />} />
           </Routes>
         ) : (
