@@ -20,13 +20,18 @@ export default function ContextJotterList({ id }) {
   }, [id]);
 
   return (
-    <div>
-      <h1>Jotters:</h1>
-      <div>
-        {jotters.length &&
-          jotters.map((jotter) => (
-            <TeacherJotterCard key={jotter.id} jotter={jotter} />
-          ))}
+    <div className="card card-bordered">
+      <div className="card-body">
+        <h1 className="text-lg font-bold">Jotters:</h1>
+        <div>
+          {jotters.length ? (
+            jotters.map((jotter) => (
+              <TeacherJotterCard key={jotter.id} jotter={jotter} />
+            ))
+          ) : (
+            <p>No jotters created yet</p>
+          )}
+        </div>
       </div>
     </div>
   );

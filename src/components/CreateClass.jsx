@@ -24,17 +24,26 @@ export default function CreateClass({ setShowNewClassForm, setClasses }) {
   return (
     <div>
       <label>Class name:</label>
-      <input required value={name} onChange={(e) => setName(e.target.value)} />
+      <input
+        required
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="input input-bordered mb-3 w-full"
+      />
       <label>Year group:</label>
       <input
         required
         value={yearGroup}
         onChange={(e) => setYearGroup(e.target.value)}
+        className="input input-bordered mb-3 w-full"
       />
-      <button className="btn" onClick={handleSubmit}>
+      <button className="btn btn-success mr-3" onClick={handleSubmit}>
         Submit
       </button>
-      <button className="btn" onClick={() => setShowNewClassForm(false)}>
+      <button
+        className="btn btn-warning"
+        onClick={() => setShowNewClassForm(false)}
+      >
         Cancel
       </button>
     </div>

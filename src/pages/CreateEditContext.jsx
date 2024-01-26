@@ -17,6 +17,7 @@ export default function CreateEditContext() {
   });
   const [wordbanks, setWordbanks] = useState([]);
   const [images, setImages] = useState([]);
+  const [updatePending, setUpdatePending] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -53,10 +54,12 @@ export default function CreateEditContext() {
   }
 
   async function handleUpdateOverview() {
+    setUpdatePending("pending");
     try {
       const response = await contextsAPI.single(id, "PUT", context);
       if (response.status === 200) {
         setContext(response.data);
+        setUpdatePending("updated");
       } else {
         console.error(response);
       }
@@ -80,26 +83,46 @@ export default function CreateEditContext() {
 
   return (
     <div>
-      {context && (
-        <div>
-          <h1>Context Overview:</h1>
+      <div className="card card-bordered">
+        <div className="card-body">
+          <h1 className="text-lg font-bold">Context Overview:</h1>
           <ContextForm
             context={context}
             setContext={setContext}
             handleCreateOverview={handleCreateOverview}
           />
-          {context.id && (
-            <>
-              <button className="btn" onClick={handleUpdateOverview}>
-                Update Overview
+          <div className="card-actions flex items-center justify-end">
+            {context.id ? (
+              <>
+                {updatePending === "pending" ? (
+                  <div className="loading loading-spinner loading-md" />
+                ) : updatePending === "updated" ? (
+                  <p>Context updated</p>
+                ) : (
+                  ""
+                )}
+                <button
+                  className="btn btn-warning"
+                  onClick={handleDeleteContext}
+                >
+                  Delete Context
+                </button>
+                <button
+                  className="btn btn-success"
+                  onClick={handleUpdateOverview}
+                >
+                  Update Overview
+                </button>
+              </>
+            ) : (
+              <button className="btn" onClick={handleCreateOverview}>
+                Create Overview
               </button>
-              <button className="btn" onClick={handleDeleteContext}>
-                Delete Context
-              </button>
-            </>
-          )}
+            )}
+          </div>
         </div>
-      )}
+      </div>
+
       {context.id && (
         <>
           <div>
@@ -113,6 +136,7 @@ export default function CreateEditContext() {
             <WordBankForm setWordbanks={setWordbanks} context={context} />
           </div>
           <div>
+            <h1>Images:</h1>
             {/* Images */}
             {images &&
               images.length &&
@@ -125,7 +149,6 @@ export default function CreateEditContext() {
                   context={context}
                 />
               ))}
-            <h1>Images:</h1>
             <ImageForm
               images={images}
               setImages={setImages}

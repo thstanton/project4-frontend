@@ -36,24 +36,28 @@ export default function EditImage({ image, images, setImages }) {
   return (
     <>
       {showImage && (
-        <div>
-          <div className="card">
-            <div className="card-body">
-              <img src={image.url} alt="" />
+        <div className="card card-bordered card-side mb-3">
+          <figure className="">
+            <img src={image.url} alt="" className="w-60 h-60 object-cover"/>
+          </figure>
+          <div className="card-body">
+            <h1 className="font-bold text-lg">Edit Image:</h1>
+            <label>Image URL:</label>
+            <input
+              type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className="textarea textarea-bordered mb-3"
+            />
+            <div className="mb-3 flex justify-end gap-2">
+              <button className="btn btn-warning" onClick={handleDelete}>
+                Delete Image
+              </button>
+              <button className="btn btn-success" onClick={handleUpdate}>
+                Update Image
+              </button>
             </div>
           </div>
-          <label>Image URL:</label>
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          />
-          <button className="btn" onClick={handleUpdate}>
-            Update Image
-          </button>
-          <button className="btn" onClick={handleDelete}>
-            Delete Image
-          </button>
         </div>
       )}
     </>

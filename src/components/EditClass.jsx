@@ -7,6 +7,7 @@ export default function EditClass({
   setClasses,
   setPupilClass,
   pupilClass,
+  deleteClass,
 }) {
   const [updatedClass, setUpdatedClass] = useState(pupilClass);
 
@@ -36,27 +37,54 @@ export default function EditClass({
   }
 
   return (
-    <div>
-      <label>Class name:</label>
-      <input
-        required
-        name="name"
-        value={updatedClass.name}
-        onChange={handleChange}
-      />
-      <label>Year group:</label>
-      <input
-        required
-        name="year_group"
-        value={updatedClass.year_group}
-        onChange={handleChange}
-      />
-      <button className="btn" onClick={handleSubmit}>
-        Submit
-      </button>
-      <button className="btn" onClick={() => setShowEditClassForm(false)}>
-        Cancel
-      </button>
-    </div>
+    <>
+      <div>
+        <label>Class name:</label>
+        <input
+          className="input input-bordered mb-3 w-full"
+          required
+          name="name"
+          value={updatedClass.name}
+          onChange={handleChange}
+        />
+        <label>Year group:</label>
+        <input
+          className="input input-bordered mb-3 w-full"
+          required
+          name="year_group"
+          value={updatedClass.year_group}
+          onChange={handleChange}
+        />
+        <button className="btn btn-success mr-3" onClick={handleSubmit}>
+          Submit
+        </button>
+        <button
+          className="btn btn-warning mr-3"
+          onClick={() => setShowEditClassForm(false)}
+        >
+          Cancel
+        </button>
+        <button
+          className="btn btn-error"
+          onClick={() => document.getElementById("delete-modal").showModal()}
+        >
+          Delete Class
+        </button>
+      </div>
+      <dialog id="delete-modal" className="modal">
+        <div className="modal-box">
+          <h3>Are you sure you want to delete {pupilClass.name}?</h3>
+          <p>This action cannot be undone</p>
+          <div className="modal-action">
+            <button className="btn" onClick={deleteClass}>
+              Confirm
+            </button>
+            <form method="dialog">
+              <button className="btn">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+    </>
   );
 }

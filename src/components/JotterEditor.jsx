@@ -5,7 +5,7 @@ export default function JotterEditor({ body, setBody, complete }) {
       value={body}
       onChange={(e) => setBody(e.target.value)}
       readOnly={complete}
-      className="h-48 w-full text-4xl"
+      className="textarea textarea-bordered h-48 w-full text-4xl"
     />
   );
 }

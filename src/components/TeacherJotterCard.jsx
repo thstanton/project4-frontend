@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function TeacherJotterCard({ jotter }) {
   return (
-    <Link href={`/jotter/${jotter.id}`}>
+    <Link to={`/jotter/${jotter.id}`}>
       <div className="card">
         <div className="card-body">
           {jotter.author.first_name}

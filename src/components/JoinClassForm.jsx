@@ -25,15 +25,20 @@ export default function JoinClassForm({ setShowJoinClass, setUser }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1>Join class:</h1>
+        <h1 className="font-bold text-lg mb-3">Join class:</h1>
         <label>Enter the key given to you by your teacher:</label>
         <input
           type="text"
           value={accessKey}
           onChange={(e) => setAccessKey(e.target.value)}
+          className="input input-bordered w-full mb-3"
           required
         />
-        <button className="btn" type="submit">Submit</button>
+        <div className="flex justify-end">
+          <button className="btn" type="submit">
+            Submit
+          </button>
+        </div>
       </form>
       {errorMessage && <p>{errorMessage}</p>}
     </div>

@@ -7,9 +7,9 @@ export default function WordBanksContainer({
   complete,
 }) {
   return (
-    <div>
-      <h1 className="text-3xl font-bold">Word Banks</h1>
-      <div className="flex flex-row">
+    <div className="mb-3">
+      <h1 className="text-3xl font-bold mb-3">Word Banks</h1>
+      <div className="flex flex-row gap-3">
         {wordbanks.map((wordbank, idx) => (
           <WordBank
             key={idx}

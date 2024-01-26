@@ -3,7 +3,7 @@ import { classesAPI } from "../utils/classes-api";
 import CreateClass from "../components/CreateClass";
 import ClassDetailView from "../components/ClassDetailView";
 
-export default function TeacherHome() {
+export default function TeacherHome({ user }) {
   const [classes, setClasses] = useState([]);
   const [showNewClassForm, setShowNewClassForm] = useState(false);
   const [selectedClass, setSelectedClass] = useState();
@@ -13,6 +13,7 @@ export default function TeacherHome() {
       try {
         const response = await classesAPI.own();
         if (response.status === 200) setClasses(response.data);
+        console.log(response);
       } catch (error) {
         console.error(error);
       }
@@ -22,8 +23,15 @@ export default function TeacherHome() {
 
   return (
     <div>
-      <div>
-        <button className="btn" onClick={() => setShowNewClassForm(true)}>
+      <div className="mb-3 flex w-full items-center justify-between">
+        <div>
+          <h1 className="text-xl font-bold">Welcome {user.first_name}</h1>
+          <p>You can view and edit your classes here</p>
+        </div>
+        <button
+          className="btn btn-primary"
+          onClick={() => setShowNewClassForm(true)}
+        >
           Create new class
         </button>
         {showNewClassForm && (
@@ -34,18 +42,26 @@ export default function TeacherHome() {
         )}
       </div>
       <div>
-        <h1>My Classes:</h1>
-        {classes &&
-          classes.map((pupilClass) => (
-            <button
-              key={pupilClass.id}
-              onClick={() => {
-                setSelectedClass(pupilClass);
-              }}
-            >
-              {pupilClass.name}
-            </button>
-          ))}
+        {classes.length ? (
+          <div className="tabs-boxed tabs">
+            {classes &&
+              classes.map((pupilClass) => (
+                <button
+                  className={
+                    selectedClass === pupilClass ? "tab tab-active" : "tab"
+                  }
+                  key={pupilClass.id}
+                  onClick={() => {
+                    setSelectedClass(pupilClass);
+                  }}
+                >
+                  {pupilClass.name}
+                </button>
+              ))}
+          </div>
+        ) : (
+          <div className="skeleton h-10 w-full"></div>
+        )}
         {selectedClass && (
           <ClassDetailView
             pupilClass={selectedClass}

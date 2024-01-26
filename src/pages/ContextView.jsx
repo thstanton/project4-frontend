@@ -26,18 +26,18 @@ export default function ContextView() {
   }, [id]);
 
   return (
-    <div>
+    <div className="mx-auto w-full">
       {context && (
-        <div className="container">
-          <div>
+        <div>
+          <div className="flex justify-end">
             <button
-              className="btn btn-warning"
+              className="btn btn-info"
               onClick={() => navigate(`/contexts/${id}/edit`)}
             >
               Edit Context
             </button>
-            <JotterInstructions context={context} />
           </div>
+          <JotterInstructions context={context} />
           <div className="flex flex-row justify-stretch">
             <WordBanksContainer wordbanks={context.wordbanks} complete={true} />
           </div>

@@ -52,39 +52,54 @@ export default function ContextClasses({ id, classes, setContext }) {
   }
 
   return (
-    <div>
-      <h1>Context assigned to:</h1>
-      {classes.map((pupilClass) => (
-        <div className="card" key={pupilClass.id}>
-          <div className="card-body">
-            <h2>{pupilClass.name}</h2>
-            <p>{pupilClass.year_group}</p>
-          </div>
-          <div className="card-actions">
-            <button className="btn" onClick={() => unassignClass(pupilClass.id)}>
-              Unassign
-            </button>
-          </div>
+    <div className="card card-bordered mb-3">
+      <div className="card-body">
+        <h1 className="mb-3 text-lg font-bold">Assign to your classes:</h1>
+        <div className="mb-3 flex w-full gap-2">
+          <select
+            value={newClass}
+            onChange={(e) => setNewClass(e.target.value)}
+            className="select select-bordered flex-grow"
+          >
+            <option value="0">Choose one:</option>
+            {teacherClasses &&
+              teacherClasses.length &&
+              teacherClasses
+                .filter(
+                  (tchrCls) =>
+                    !classes.map((assdCls) => assdCls.id).includes(tchrCls.id),
+                )
+                .map((tchrCls) => (
+                  <option key={tchrCls.id} value={tchrCls.id}>
+                    {tchrCls.name}
+                  </option>
+                ))}
+          </select>
+          <button className="btn btn-info" onClick={assignClass}>
+            Assign to class
+          </button>
         </div>
-      ))}
-      <select value={newClass} onChange={(e) => setNewClass(e.target.value)}>
-        <option value="0">Choose one:</option>
-        {teacherClasses &&
-          teacherClasses.length &&
-          teacherClasses
-            .filter(
-              (tchrCls) =>
-                !classes.map((assdCls) => assdCls.id).includes(tchrCls.id),
-            )
-            .map((tchrCls) => (
-              <option key={tchrCls.id} value={tchrCls.id}>
-                {tchrCls.name}
-              </option>
-            ))}
-      </select>
-      <button className="btn" onClick={assignClass}>
-        Assign to class
-      </button>
+        <h1 className="mb-3">Assigned to:</h1>
+        {classes.map((pupilClass) => (
+          <div
+            className="h-50 card mb-3 w-60 bg-stone-100 hover:drop-shadow"
+            key={pupilClass.id}
+          >
+            <div className="card-body">
+              <h2 className="text-lg font-bold">{pupilClass.name}</h2>
+              <p>{pupilClass.year_group}</p>
+              <div className="card-actions">
+                <button
+                  className="btn btn-warning"
+                  onClick={() => unassignClass(pupilClass.id)}
+                >
+                  Unassign
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

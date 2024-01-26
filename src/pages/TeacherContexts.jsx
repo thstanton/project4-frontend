@@ -26,8 +26,11 @@ export default function TeacherContexts() {
 
   return (
     <div>
-      <div>
-        <button className="btn" onClick={() => navigate("/contexts/create")}>
+      <div className="mb-3 flex justify-end">
+        <button
+          className="btn btn-info"
+          onClick={() => navigate("/contexts/create")}
+        >
           Create new context
         </button>
       </div>
@@ -35,7 +38,9 @@ export default function TeacherContexts() {
         {dataLoaded ? (
           <TeacherContextCardList contexts={contexts} />
         ) : (
-          <p>Loading...</p>
+          <div className="flex justify-center">
+            <div className="loading loading-dots loading-lg mx-auto"></div>
+          </div>
         )}
       </div>
     </div>

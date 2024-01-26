@@ -4,6 +4,7 @@ export default function ClassPupilListItem({
   pupil,
   pupilClass,
   setPupilClass,
+  showEditClassForm,
 }) {
   async function removePupil() {
     try {
@@ -21,11 +22,15 @@ export default function ClassPupilListItem({
     }
   }
   return (
-    <p>
-      {pupil.first_name}{" "}
-      <button className="btn" onClick={removePupil}>
-        Remove from class
-      </button>
-    </p>
+    <tr>
+      <td>{pupil.first_name}</td>
+      {showEditClassForm && (
+        <td>
+          <button className="btn btn-warning btn-xs" onClick={() => document.getElementById('remove-pupil-modal').showModal()}>
+            Remove from class
+          </button>
+        </td>
+      )}
+    </tr>
   );
 }

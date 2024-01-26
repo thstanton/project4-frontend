@@ -3,3 +3,7 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100;400;500;700&display=swap");
+
+.react-icons {
+    vertical-align: middle;
+  }

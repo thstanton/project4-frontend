@@ -29,13 +29,13 @@ function App() {
   }, []);
 
   return (
-    <main className="App">
+    <main className="bg-stone-50 w-full">
       <NavBar user={user} setUser={setUser} />
       <div className="m-3">
         {user && user.groups[0] === 1 ? (
           // Teacher Routes
           <Routes>
-            <Route path="/" element={<TeacherHome />} />
+            <Route path="/" element={<TeacherHome user={user} />} />
             <Route path="/contexts" element={<TeacherContexts />} />
             <Route path="/contexts/:id" element={<ContextView />} />
             <Route path="/contexts/create" element={<CreateEditContext />} />

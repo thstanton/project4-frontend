@@ -14,6 +14,7 @@ export default function WordBankForm({ context, setWordbanks }) {
       const response = await wordbanksAPI.createBank(newWordBank);
       if (response.status === 201) {
         setWordbanks((prevWordbanks) => [...prevWordbanks, response.data]);
+        setTitle("")
       }
     } catch (err) {
       console.error(err);
@@ -21,20 +22,25 @@ export default function WordBankForm({ context, setWordbanks }) {
   }
 
   return (
-    <div>
-      <h2>Add Word Bank:</h2>
-      <form onSubmit={handleAddWordBank}>
-        <label>Title:</label>
-        <input
-          type="text"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-          required
-        />
-        <button className="btn" type="submit">
-          Add Word Bank
-        </button>
-      </form>
+    <div className="card card-bordered mb-3">
+      <div className="card-body">
+        <h2 className="mb-3 text-lg font-bold">Add Word Bank:</h2>
+        <form onSubmit={handleAddWordBank}>
+          <label>Title:</label>
+          <input
+            type="text"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            className="input input-bordered mb-3 w-full"
+            required
+          />
+          <div className="flex justify-end">
+            <button className="btn btn-success" type="submit">
+              Add Word Bank
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
