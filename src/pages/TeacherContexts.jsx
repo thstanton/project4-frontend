@@ -15,6 +15,7 @@ export default function TeacherContexts() {
         if (response.status === 200) {
           setContexts(response.data);
           setDataLoaded(true);
+          console.log(response)
         }
       } catch (err) {
         console.error(err);

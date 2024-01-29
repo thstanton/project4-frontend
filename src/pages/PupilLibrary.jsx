@@ -11,6 +11,7 @@ export default function PupilHome({ user, setUser }) {
       try {
         const finishedData = await jottersAPI.finished();
         setFinished(finishedData.data);
+        console.log(finishedData)
         setPending(false);
       } catch (err) {
         throw new Error(err);
@@ -26,7 +27,7 @@ export default function PupilHome({ user, setUser }) {
         {!pending ? (
           <JotterCardList jotters={finished} />
         ) : (
-          <div className="skeleton w-60 h-60"></div>
+          <div className="skeleton w-96 h-60"></div>
         )}
       </div>
     </div>

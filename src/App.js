@@ -14,6 +14,7 @@ import "./App.css";
 import { getToken, getUser } from "./utils/auth";
 import SignUp from "./pages/SignUp";
 import PupilUserInfo from "./pages/PupilUserInfo";
+import TeacherPupilView from "./pages/TeacherPupilView";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -43,13 +44,14 @@ function App() {
             <Route path="/contexts/create" element={<CreateEditContext />} />
             <Route path="/contexts/:id/edit" element={<CreateEditContext />} />
             <Route path="/jotter/:id" element={<JotterView />} />
+            <Route path="/pupil/:id" element={<TeacherPupilView />} />
           </Routes>
         ) : user && user.groups[0] === 2 ? (
           // Pupil Routes
           <Routes>
             <Route
               path="/"
-              element={<PupilHome user={user} setUser={setUser} />}
+              element={<PupilHome user={user} />}
             />
             <Route path="/classes" element={<PupilUserInfo user={user} />} />
             <Route path="/library" element={<PupilLibrary />} />

@@ -81,16 +81,13 @@ export default function ContextClasses({ id, classes, setContext }) {
         </div>
         <h1 className="mb-3">Assigned to:</h1>
         {classes.map((pupilClass) => (
-          <div
-            className="h-50 card mb-3 w-60 bg-stone-100 hover:drop-shadow"
-            key={pupilClass.id}
-          >
+          <div className="h-50 card mb-3 w-60 bg-stone-100" key={pupilClass.id}>
             <div className="card-body">
               <h2 className="text-lg font-bold">{pupilClass.name}</h2>
               <p>{pupilClass.year_group}</p>
               <div className="card-actions">
                 <button
-                  className="btn btn-warning"
+                  className="btn btn-warning btn-xs"
                   onClick={() => unassignClass(pupilClass.id)}
                 >
                   Unassign

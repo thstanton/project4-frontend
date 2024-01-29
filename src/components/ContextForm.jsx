@@ -1,7 +1,4 @@
-export default function ContextForm({
-  context,
-  setContext,
-}) {
+export default function ContextForm({ context, setContext }) {
   function handleChange(e) {
     const { name, value } = e.target;
     setContext((prevContext) => ({ ...prevContext, [name]: value }));
@@ -16,7 +13,7 @@ export default function ContextForm({
           name="title"
           value={context.title}
           onChange={handleChange}
-          className="input input-bordered w-full mb-3"
+          className="input input-bordered mb-3 w-full"
           required
         />
         <label>Instructions:</label>
@@ -25,7 +22,7 @@ export default function ContextForm({
           name="instructions"
           value={context.instructions}
           onChange={handleChange}
-          className="textarea textarea-bordered w-full mb-3"
+          className="textarea textarea-bordered mb-3 w-full"
           required
         />
         <label>Prompt:</label>
@@ -34,7 +31,7 @@ export default function ContextForm({
           name="prompt"
           value={context.prompt}
           onChange={handleChange}
-          className="input input-bordered w-full mb-3"
+          className="input input-bordered mb-3 w-full"
           required
         />
       </form>

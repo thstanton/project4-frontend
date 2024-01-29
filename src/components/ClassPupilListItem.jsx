@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import { classesAPI } from "../utils/classes-api";
+import { useState } from "react";
 
 export default function ClassPupilListItem({
   pupil,
@@ -6,6 +8,8 @@ export default function ClassPupilListItem({
   setPupilClass,
   showEditClassForm,
 }) {
+  const [confirmRemove, setConfirmRemove] = useState(false);
+
   async function removePupil() {
     try {
       const response = await classesAPI.removePupil(pupilClass.id, pupil.id);
@@ -23,14 +27,35 @@ export default function ClassPupilListItem({
   }
   return (
     <tr>
-      <td>{pupil.first_name}</td>
-      {showEditClassForm && (
-        <td>
-          <button className="btn btn-warning btn-xs" onClick={() => document.getElementById('remove-pupil-modal').showModal()}>
-            Remove from class
-          </button>
-        </td>
-      )}
+      <td className="w-60">
+        <Link to={`/pupil/${pupil.id}`} className="hover:font-bold">
+          {pupil.first_name}
+        </Link>
+      </td>
+      {showEditClassForm &&
+        (!confirmRemove ? (
+          <td>
+            <button
+              className="btn btn-warning btn-xs"
+              onClick={() => setConfirmRemove(true)}
+            >
+              Remove from class
+            </button>
+          </td>
+        ) : (
+          <td>
+            Are you sure?{" "}
+            <button className="btn btn-error btn-xs" onClick={removePupil}>
+              Confirm
+            </button>
+            <button
+              className="btn btn-xs"
+              onClick={() => setConfirmRemove(false)}
+            >
+              Cancel
+            </button>
+          </td>
+        ))}
     </tr>
   );
 }

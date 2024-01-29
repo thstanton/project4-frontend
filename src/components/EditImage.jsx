@@ -37,8 +37,8 @@ export default function EditImage({ image, images, setImages }) {
     <>
       {showImage && (
         <div className="card card-bordered card-side mb-3">
-          <figure className="">
-            <img src={image.url} alt="" className="w-60 h-60 object-cover"/>
+          <figure className="w-60 h-70">
+            <img src={image.url} alt="" className="w-full h-full object-cover"/>
           </figure>
           <div className="card-body">
             <h1 className="font-bold text-lg">Edit Image:</h1>

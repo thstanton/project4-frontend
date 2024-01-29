@@ -1,4 +1,5 @@
 import JoinClassForm from "../components/JoinClassForm";
+import PupilBadges from "../components/PupilBadges";
 
 export default function PupilUserInfo({ user, setUser }) {
   return (
@@ -32,6 +33,7 @@ export default function PupilUserInfo({ user, setUser }) {
           </table>
         </div>
       </div>
+      <PupilBadges />
       <JoinClassForm setUser={setUser} />
     </div>
   );

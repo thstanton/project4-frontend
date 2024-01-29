@@ -30,16 +30,14 @@ export default function TeacherHome({ user }) {
         </div>
         <button
           className="btn btn-primary"
-          onClick={() => setShowNewClassForm(true)}
+          onClick={() => document.getElementById("new-class-modal").showModal()}
         >
           Create new class
         </button>
-        {showNewClassForm && (
-          <CreateClass
-            setClasses={setClasses}
-            setShowNewClassForm={setShowNewClassForm}
-          />
-        )}
+        <CreateClass
+          setClasses={setClasses}
+          setShowNewClassForm={setShowNewClassForm}
+        />
       </div>
       <div>
         {classes.length ? (

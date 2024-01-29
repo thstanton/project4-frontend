@@ -83,7 +83,7 @@ export default function CreateEditContext() {
 
   return (
     <div>
-      <div className="card card-bordered">
+      <div className="card card-bordered mb-3">
         <div className="card-body">
           <h1 className="text-lg font-bold">Context Overview:</h1>
           <ContextForm
@@ -127,7 +127,7 @@ export default function CreateEditContext() {
         <>
           <div>
             {/* Word Banks - display current, form to add new */}
-            <h1>Word Banks:</h1>
+            <h1 className="mb-3 text-lg font-bold">Word Banks:</h1>
             {wordbanks &&
               wordbanks.length &&
               wordbanks.map((wordbank) => (
@@ -136,7 +136,7 @@ export default function CreateEditContext() {
             <WordBankForm setWordbanks={setWordbanks} context={context} />
           </div>
           <div>
-            <h1>Images:</h1>
+            <h1 className="mb-3 text-lg font-bold">Images:</h1>
             {/* Images */}
             {images &&
               images.length &&

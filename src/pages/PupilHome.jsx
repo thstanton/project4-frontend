@@ -32,7 +32,7 @@ export default function PupilHome({ user }) {
         {!pending ? (
           <ContextCardList contexts={contexts} />
         ) : (
-          <div className="skeleton w-60 h-60"></div>
+          <div className="skeleton w-96 h-60"></div>
         )}
       </div>
       <div>
@@ -40,7 +40,7 @@ export default function PupilHome({ user }) {
         {!pending ? (
           <JotterCardList jotters={unfinished} />
         ) : (
-          <div className="skeleton w-60 h-60"></div>
+          <div className="skeleton w-96 h-60"></div>
         )}
       </div>
     </div>
