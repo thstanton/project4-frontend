@@ -1,12 +1,15 @@
-import WordBank from "./WordBank"
+import WordBank from "./WordBank";
 
-export default function WordBanksContainer({ wordbanks, body, setBody, complete }) {
+export default function WordBanksContainer({
+  wordbanks,
+  body,
+  setBody,
+  complete,
+}) {
   return (
-    <div>
-      <h1 className="font-bold text-3xl">
-        Word Banks
-      </h1>
-      <div className="flex flex-row">
+    <div className="mb-3">
+      <h1 className="text-3xl font-bold mb-3">Word Banks</h1>
+      <div className="flex flex-row gap-3">
         {wordbanks.map((wordbank, idx) => (
           <WordBank
             key={idx}
@@ -18,5 +21,5 @@ export default function WordBanksContainer({ wordbanks, body, setBody, complete 
         ))}
       </div>
     </div>
-  )
+  );
 }

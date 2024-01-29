@@ -1,94 +1,93 @@
-import { Button } from '@nextui-org/react'
-import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { jottersAPI } from '../utils/jotters-api'
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { jottersAPI } from "../utils/jotters-api";
 
 export default function JotterView() {
-  const { id } = useParams()
-  const navigate = useNavigate()
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [jotter, setJotter] = useState({
-    id: '',
+    id: "",
     author: {
-      id: '',
+      id: "",
       username: "",
       first_name: "",
       pupil_classes: [],
-      groups: []
+      groups: [],
     },
     context: {
-      id: '',
+      id: "",
       title: "",
       prompt: "",
       instructions: "",
       author: "",
       wordbanks: [],
-      images: []
+      images: [],
     },
     body: "",
-    complete: ""
-  })
+    complete: "",
+  });
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await jottersAPI.single(id, 'GET')
+        const response = await jottersAPI.single(id, "GET");
 
         if (response.status === 200) {
-          setJotter(response.data)
+          setJotter(response.data);
         }
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     }
-    fetchData()
-  }, [id])
+    fetchData();
+  }, [id]);
 
   async function handleUpdate() {
     const updated = {
       ...jotter,
-      complete: false
-    }
+      complete: false,
+    };
     try {
-      const response = await jottersAPI.single(id, 'PUT', updated)
+      const response = await jottersAPI.single(id, "PUT", updated);
       if (response.status === 200) {
-        setJotter(response.data)
+        setJotter(response.data);
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 
   return (
     <div>
-      { jotter.id ?
-      <div>
+      {jotter.id ? (
         <div>
-          <h1>{jotter.author.first_name}'s Jotter</h1>
-          <h2>{jotter.context.title}</h2>
-          <p>{jotter.context.instructions}</p>
+          <div>
+            <h1>{jotter.author.first_name}'s Jotter</h1>
+            <h2>{jotter.context.title}</h2>
+            <p>{jotter.context.instructions}</p>
+          </div>
+          <div>
+            <p>{jotter.body}</p>
+          </div>
+          <div>
+            <button
+              className={!jotter.complete ? "btn btn-disabled" : "btn"}
+              onClick={handleUpdate}
+            >
+              Send back to {jotter.author.first_name}
+            </button>
+            <button
+              className="btn"
+              onClick={() => navigate(-1)}
+              color="default"
+            >
+              Back
+            </button>
+          </div>
         </div>
-        <div>
-          <p>{jotter.body}</p>
-        </div>
-        <div>
-          <Button 
-            onClick={handleUpdate}
-            disabled={!jotter.complete}
-            color="primary"
-          >
-            Send back to {jotter.author.first_name}
-          </Button>
-          <Button 
-            onClick={() => navigate(-1)}
-            color="default"
-          >
-            Back
-          </Button>
-        </div>
-      </div>
-      :
-      <p>Loading...</p>
-      }
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
-  )
+  );
 }

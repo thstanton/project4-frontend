@@ -1,31 +1,36 @@
-import { useNavigate } from "react-router-dom";
-import { Card, CardBody, CardFooter } from "@nextui-org/react";
+import { Link } from "react-router-dom";
 
 export default function TeacherContextCard({ context }) {
-    const navigate = useNavigate()
+  return (
+    <Link to={`/contexts/${context.id}`}>
+      <div className="card card-side h-80 w-full bg-stone-200 hover:drop-shadow-lg">
+        {context.images[0] && (
+          <figure className="h-80 w-80">
+            <img src={`${context.images[0]}`} alt="" className="w-full h-full object-cover" />
+          </figure>
+        )}
+        <div className="card-body flex flex-col justify-between">
+          <h4 className="card-title text-lg font-bold text-neutral-700">
+            {context.title}
+          </h4>
 
-    return (
-        <Card 
-            isPressable 
-            onPress={() => navigate(`/contexts/${context.id}`)}
-            className="w-52 h-52"
-        >
-            <CardBody>
-                <h4>{ context.title }</h4>
-                
-            </CardBody>
-            <CardFooter>
-                { context.assigned_classes.length ?
-                    <>
-                        <p>Assigned to:</p>
-                        { context.assigned_classes.map(pupilClass => (
-                            <p key={pupilClass.id}>{pupilClass.name}</p>
-                        ))}
-                    </>
-                    :
-                    <p>Not assigned to any classes</p>
-                }
-            </CardFooter>
-        </Card>
-  )
+          {context.assigned_classes.length ? (
+            <div>
+              <p>Assigned to:</p>
+              {context.assigned_classes.map((pupilClass) => (
+                <p
+                  key={pupilClass.id}
+                  className="badge badge-info mb-2 h-8 w-40"
+                >
+                  {pupilClass.name}
+                </p>
+              ))}
+            </div>
+          ) : (
+            <p>Not assigned to any classes</p>
+          )}
+        </div>
+      </div>
+    </Link>
+  );
 }

@@ -1,61 +1,48 @@
-import { useEffect, useState } from 'react'
-import { jottersAPI } from '../utils/jotters-api'
-import { contextsAPI } from '../utils/contexts-api'
-import JotterCardList from '../components/JotterCardList'
-import ContextCardList from '../components/ContextCardList'
-import PupilUserInfo from '../components/PupilUserInfo'
+import { useEffect, useState } from "react";
+import { jottersAPI } from "../utils/jotters-api";
+import { contextsAPI } from "../utils/contexts-api";
+import JotterCardList from "../components/JotterCardList";
+import ContextCardList from "../components/ContextCardList";
 
-export default function PupilHome({ user, setUser }) {
-  const [contexts, setContexts] = useState(null)
-  const [unfinished, setUnfinished] = useState(null)
-  const [finished, setFinished] = useState(null)
+export default function PupilHome({ user }) {
+  const [contexts, setContexts] = useState(null);
+  const [unfinished, setUnfinished] = useState(null);
+  const [pending, setPending] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const contextsData = await contextsAPI.getAssigned()
-        const unfinishedData = await jottersAPI.unfinished()
-        const finishedData = await jottersAPI.finished()
+        const contextsData = await contextsAPI.getAssigned();
+        const unfinishedData = await jottersAPI.unfinished();
 
-        setContexts(contextsData.data)
-        setUnfinished(unfinishedData.data)
-        setFinished(finishedData.data)
-
+        setContexts(contextsData.data);
+        setUnfinished(unfinishedData.data);
+        setPending(false)
       } catch (err) {
-
-        throw new Error(err)
+        throw new Error(err);
       }
     }
-    fetchData()
-  }, [user])
+    fetchData();
+  }, [user]);
 
   return (
-    <div className='container'>
-      <PupilUserInfo user={user} setUser={setUser} />
-      <div>
-        <h1 className='font-display text-3xl'>To Do List</h1>
-        { contexts && contexts.length ? 
-          <ContextCardList contexts={ contexts } /> 
-        :
-          <p>You're up to date!</p>
-        }
+    <div className="container">
+      <div className="mb-3">
+        <h1 className="font-display text-3xl mb-3">&#128221; To Do List</h1>
+        {!pending ? (
+          <ContextCardList contexts={contexts} />
+        ) : (
+          <div className="skeleton w-96 h-60"></div>
+        )}
       </div>
       <div>
-        <h1 className='font-display text-3xl'>To Finish</h1>
-        { unfinished && unfinished.length ? 
-          <JotterCardList jotters={ unfinished } /> 
-        :
-          <p>You're up to date!</p>
-        }
-      </div>
-      <div>
-        <h1 className='font-display text-3xl'>My Library</h1>
-        { finished && finished.length ? 
-          <JotterCardList jotters={ finished } /> 
-        :
-          <p>Your library is empty - get writing!</p>
-        }
+        <h1 className="font-display text-3xl mb-3">&#128680; To Finish</h1>
+        {!pending ? (
+          <JotterCardList jotters={unfinished} />
+        ) : (
+          <div className="skeleton w-96 h-60"></div>
+        )}
       </div>
     </div>
-  )
+  );
 }

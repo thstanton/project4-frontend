@@ -6,17 +6,17 @@ Jotter is my final General Assembly Software Engineering Immersive Course projec
 
 ## Deployment link
 
-**[https://jotter.up.railway.app/](https://jotter.up.railway.app/)**	
+**[https://jotter.up.railway.app/](https://jotter.up.railway.app/)**
 
 ## Getting Started/Code Installation
 
 - The front-end code is accessible through this repo: [https://github.com/thstanton/project4-frontend](https://github.com/thstanton/project4-frontend)
-- Run ``npm install`` to install dependencies
-- Run ``npm start`` to start local server
+- Run `npm install` to install dependencies
+- Run `npm start` to start local server
 
 - The back-end code is accessible through this repo: [https://github.com/thstanton/project4-backend](https://github.com/thstanton/project4-backend)
-- Run ``pip install -r requirements.txt`` to install dependencies
-- Run ``python3 manage.py runserver`` to start local server
+- Run `pip install -r requirements.txt` to install dependencies
+- Run `python3 manage.py runserver` to start local server
 
 ## Timeframe & Working Team
 
@@ -72,25 +72,26 @@ This project will push you technically, testing all the knowledge you've acquire
 
 During this project, your instructors are going to be evaluating your ability to:
 
--  Design, layout and configure Databases
+- Design, layout and configure Databases
 
--  Logically think about solving specific problems
+- Logically think about solving specific problems
 
--  Properly feed data between different technologies
+- Properly feed data between different technologies
 
 ​
+
 ### Technical Requirements
 
 Your App Must:
 
-* Be a full-stack Django/React application.
-* Connect to and perform data operations on a PostgreSQL database (the default SQLLite3 database is not acceptable).
-* If consuming a third party API (OPTIONAL), have at least one data entity (Model) in addition to the built-in User model. The related entity can be either a one-to-many (1:M) or a many-to-many (M:M) relationship.
-* If not consuming an API, have at least two data entities (Models) in addition to the built-in User model. It is preferable to have at least one one-to-many (1:M) and one many-to-many (M:M) relationship between entities/models.
-* Have full-CRUD data operations across any combination of the app's models (excluding the User model). For example, creating/reading/updating posts and creating/deleting comments qualifies as full-CRUD data operations.
-* Authenticate users using Django's built-in authentication.
-* Implement authorization by restricting access to the Creation, Updating & Deletion of data resources using the `login_required` decorator in the case of view functions; or, in the case of class-based views, inheriting from the `LoginRequiredMixin` class.
-* Be deployed online using Railway. Presentations must use the deployed application.
+- Be a full-stack Django/React application.
+- Connect to and perform data operations on a PostgreSQL database (the default SQLLite3 database is not acceptable).
+- If consuming a third party API (OPTIONAL), have at least one data entity (Model) in addition to the built-in User model. The related entity can be either a one-to-many (1:M) or a many-to-many (M:M) relationship.
+- If not consuming an API, have at least two data entities (Models) in addition to the built-in User model. It is preferable to have at least one one-to-many (1:M) and one many-to-many (M:M) relationship between entities/models.
+- Have full-CRUD data operations across any combination of the app's models (excluding the User model). For example, creating/reading/updating posts and creating/deleting comments qualifies as full-CRUD data operations.
+- Authenticate users using Django's built-in authentication.
+- Implement authorization by restricting access to the Creation, Updating & Deletion of data resources using the `login_required` decorator in the case of view functions; or, in the case of class-based views, inheriting from the `LoginRequiredMixin` class.
+- Be deployed online using Railway. Presentations must use the deployed application.
 
 ## Planning
 
@@ -103,11 +104,9 @@ Your App Must:
 
 ![Pupil pages wireframes](readme-images/image10.png)
 
-
 **ERD:**
 
 ![ERD](readme-images/image4.png)
-
 
 ## Build/Code Process
 
@@ -154,7 +153,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name', 'last_name', 'groups', 'pupil_classes', 'email', 'password']
-    
+
     extra_kwargs = {
         'password': {'write_only': True},
     }
@@ -178,41 +177,37 @@ This initially created a few issues, as the serializer was no longer serializing
 Once the majority of the back end API was set up, I switched my focus to the front end, setting up the React project. I began by setting up the routes for the different users and authorisation and authentication processes. Authentication works by fetching a token from the back end, storing the token in local storage, then fetching the user object from the back end and storing it in a state in the App.js file. For authorisation, I created a headers function which fetches the token and adds it to the authorization headers whenever the user makes a request to the back end. I protected the routes by checking which group the user is in before route matching:
 
 ```js
-{user && user.groups[0] === 1 ?
-    // Teacher Routes 
+{
+  user && user.groups[0] === 1 ? (
+    // Teacher Routes
     <Routes>
-    <Route path='/' element={<TeacherHome />} />
-    <Route path='/contexts' element={<TeacherContexts />} />
-    <Route path='/contexts/:id' element={<ContextView />} />
-    <Route path='/contexts/create' element={<CreateEditContext />} />
-    <Route path='/contexts/:id/edit' element={<CreateEditContext />} />
-    <Route path='/jotter/:id' element={<JotterView />} />
+      <Route path="/" element={<TeacherHome />} />
+      <Route path="/contexts" element={<TeacherContexts />} />
+      <Route path="/contexts/:id" element={<ContextView />} />
+      <Route path="/contexts/create" element={<CreateEditContext />} />
+      <Route path="/contexts/:id/edit" element={<CreateEditContext />} />
+      <Route path="/jotter/:id" element={<JotterView />} />
     </Routes>
-    : user && user.groups[0] === 2 ?
+  ) : user && user.groups[0] === 2 ? (
     // Pupil Routes
     <Routes>
-        <Route path='/' element={<PupilHome user={user} setUser={setUser} />} />
-        <Route path='/editor/:id' element={<PupilEditor />} />
+      <Route path="/" element={<PupilHome user={user} setUser={setUser} />} />
+      <Route path="/editor/:id" element={<PupilEditor />} />
     </Routes>
-    :
+  ) : (
     // Landing Page for Not Logged In users
     <Routes>
-        <Route path='/' element={<LandingPage user={user} setUser={setUser} />} />
-        <Route path='/pupil/signup' element={
-        <SignUp 
-            userType="2"
-            setUser={setUser}
-        />
-        } 
-        />
-        <Route path='/teacher/signup' element={
-        <SignUp 
-            userType="1"
-            setUser={setUser}
-        />
-        } 
-        />
+      <Route path="/" element={<LandingPage user={user} setUser={setUser} />} />
+      <Route
+        path="/pupil/signup"
+        element={<SignUp userType="2" setUser={setUser} />}
+      />
+      <Route
+        path="/teacher/signup"
+        element={<SignUp userType="1" setUser={setUser} />}
+      />
     </Routes>
+  );
 }
 ```
 
@@ -220,19 +215,19 @@ I also stubbed up the page-level components, as well some of the more critical c
 
 **Building the Pupil Interface**
 
-Of the user interfaces, the pupil interface was more critical, as I knew it would need to be simple to use for children. Throughout my previous two projects, I had gradually become more confident with using components to make my code modular and understanding which props would need to be passed through in order to make components functional. I was also very aware of the time pressure to get quite a lot of functionality working before the end of the week, so I made the decision to do minimal styling until the application was fully functional. 
+Of the user interfaces, the pupil interface was more critical, as I knew it would need to be simple to use for children. Throughout my previous two projects, I had gradually become more confident with using components to make my code modular and understanding which props would need to be passed through in order to make components functional. I was also very aware of the time pressure to get quite a lot of functionality working before the end of the week, so I made the decision to do minimal styling until the application was fully functional.
 
 In my previous projects I had repeated a lot of code in order to fetch data on different pages, so I tried to do this in a more methodical way. I created utility files for each of the main models and wrote all of my fetch functions in those files, calling them from the page level component wherever possible. As I had used the ‘RetrieveUpdateDestroyAPIView’ generic views from the Django REST Framework for single model instances, this enabled me to reuse some of these functions by passing in the HTTP method as a parameter in addition to using the headers function to add the JWT:
 
 ```js
 function singleContext(id, method, body) {
-    const data = axios({
-        method: method,
-        url: `${API_URL}/contexts/${id}/`,
-        headers: headers(),
-        data: body
-    })
-    return data
+  const data = axios({
+    method: method,
+    url: `${API_URL}/contexts/${id}/`,
+    headers: headers(),
+    data: body,
+  });
+  return data;
 }
 ```
 
@@ -264,7 +259,7 @@ I made use of conditional rendering to ensure that this process was easy to unde
         <div>
         {/* Word Banks - display current, form to add new */}
         <h1>Word Banks:</h1>
-        { 
+        {
             wordbanks && wordbanks.length && wordbanks.map(wordbank => (
             <EditWordBank key={wordbank.id} wordbank={wordbank} />
             ))
@@ -340,7 +335,7 @@ After deploying the project, images can no longer be added to a new context. Thi
 
 **Styling**
 
-At the end of the development week, the styling of the project was unfinished, as I ran out of time to complete it. As such, while the user interface is functional, it is not attractive or user-friendly. I am very keen to complete the styling to ensure that it is as inviting and easy-to-use as intended. 
+At the end of the development week, the styling of the project was unfinished, as I ran out of time to complete it. As such, while the user interface is functional, it is not attractive or user-friendly. I am very keen to complete the styling to ensure that it is as inviting and easy-to-use as intended.
 
 **Incorporating Image Upload**
 
