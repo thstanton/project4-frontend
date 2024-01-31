@@ -1,5 +1,4 @@
 import TeacherContextCardList from "./TeacherContextCardList";
-import EditClass from "./EditClass";
 import { useState } from "react";
 import { classesAPI } from "../utils/classes-api";
 import ClassPupilListItem from "./ClassPupilListItem";
@@ -50,29 +49,59 @@ export default function ClassDetailView({
     }
   }
 
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setUpdatedClass((prevClass) => ({ ...prevClass, [name]: value }));
+  }
+
   return (
     <>
       <div>
         <div className="card my-3 bg-neutral-100 drop-shadow">
           <div className="card-body">
-            <h1 className="card-title">Class details:</h1>
-            <h2 className="text-lg font-semibold text-neutral-800">
-              {pupilClass.name}
-            </h2>
-            <p>Year group: </p>
-            <input
-              className="input input-bordered flex items-center"
-              disabled={!showEditClassForm}
-              placeholder={pupilClass.year_group}
-            />
+            {!showEditClassForm ? (
+              <>
+                <h1 className="card-title">Class details:</h1>
+                <p className="input input-bordered flex items-center font-semibold text-neutral-800">
+                  {pupilClass.name}
+                </p>
+                <p>Year group: </p>
+                <p className="input input-bordered flex items-center">
+                  {pupilClass.year_group}
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className="card-title">Class details:</h1>
+                <input
+                  className="input input-bordered font-semibold text-neutral-800"
+                  disabled={!showEditClassForm}
+                  value={updatedClass.name}
+                  onChange={handleChange}
+                />
+                <p>Year group: </p>
+                <input
+                  className="input input-bordered flex items-center"
+                  disabled={!showEditClassForm}
+                  value={updatedClass.year_group}
+                  onChange={handleChange}
+                />
+              </>
+            )}
             <p>Teacher:</p>
-            <input
-              className="input input-bordered flex items-center"
-              disabled={!showEditClassForm}
-              placeholder={`${pupilClass.teacher.first_name} ${pupilClass.teacher.last_name}`}
-            />
+            <p
+              className={
+                "input input-bordered flex items-center " +
+                (showEditClassForm ? "italic text-slate-500" : "")
+              }
+            >{`${pupilClass.teacher.first_name} ${pupilClass.teacher.last_name}`}</p>
             <p>Class Access Key:</p>
-            <p className="input input-bordered flex items-center">
+            <p
+              className={
+                "input input-bordered flex items-center " +
+                (showEditClassForm ? "italic text-slate-500" : "")
+              }
+            >
               <FaKey className="mr-2 inline" />
               {pupilClass.access_key}
             </p>
@@ -131,7 +160,7 @@ export default function ClassDetailView({
                   </button>
                   <button
                     className="btn btn-success"
-                    onClick={() => setShowEditClassForm(true)}
+                    onClick={() => handleSubmit()}
                   >
                     Confirm Changes
                   </button>
@@ -145,7 +174,7 @@ export default function ClassDetailView({
           <TeacherContextCardList contexts={pupilClass.contexts} />
         </div>
       </div>
-      <ModalV2 
+      <ModalV2
         id="delete-class-modal"
         prompt={`Are you sure you want to delete ${pupilClass.name}?`}
         subPrompt="This action cannot be undone."

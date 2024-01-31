@@ -5,7 +5,6 @@ import ClassDetailView from "../components/ClassDetailView";
 
 export default function TeacherHome({ user }) {
   const [classes, setClasses] = useState([]);
-  const [showNewClassForm, setShowNewClassForm] = useState(false);
   const [selectedClass, setSelectedClass] = useState();
 
   useEffect(() => {
@@ -36,7 +35,6 @@ export default function TeacherHome({ user }) {
         </button>
         <CreateClass
           setClasses={setClasses}
-          setShowNewClassForm={setShowNewClassForm}
         />
       </div>
       <div>
