@@ -12,7 +12,6 @@ export default function TeacherHome({ user }) {
       try {
         const response = await classesAPI.own();
         if (response.status === 200) setClasses(response.data);
-        console.log(response);
       } catch (error) {
         console.error(error);
       }

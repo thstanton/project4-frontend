@@ -32,7 +32,7 @@ function App() {
   }, []);
 
   return (
-    <main className="w-full bg-stone-50">
+    <main className="min-h-screen w-full bg-stone-50">
       <NavBar user={user} setUser={setUser} />
       <div className="m-3">
         {user && user.groups[0] === 1 ? (
@@ -49,10 +49,7 @@ function App() {
         ) : user && user.groups[0] === 2 ? (
           // Pupil Routes
           <Routes>
-            <Route
-              path="/"
-              element={<PupilHome user={user} />}
-            />
+            <Route path="/" element={<PupilHome user={user} />} />
             <Route path="/classes" element={<PupilUserInfo user={user} />} />
             <Route path="/library" element={<PupilLibrary />} />
             <Route path="/editor/:id" element={<PupilEditor />} />

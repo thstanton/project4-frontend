@@ -75,16 +75,14 @@ export default function ClassDetailView({
                 <h1 className="card-title">Class details:</h1>
                 <input
                   className="input input-bordered font-semibold text-neutral-800"
-                  disabled={!showEditClassForm}
                   value={updatedClass.name}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <p>Year group: </p>
                 <input
                   className="input input-bordered flex items-center"
-                  disabled={!showEditClassForm}
                   value={updatedClass.year_group}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
               </>
             )}
